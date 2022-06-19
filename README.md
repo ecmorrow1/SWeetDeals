@@ -8,6 +8,8 @@ I message you in slack and i hope we can possibly make up this deliverable later
 
 
 
+# Communication
+Entirely through slack. We feel uncomfortable sharing our phone numbers with relative strangers. That may change later.
 
 
 
