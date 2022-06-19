@@ -1,3 +1,30 @@
+# Note to teacher!
+We may have to change our topic as South West may file a lawsuit and that would be terrible. 
+I message you in slack and i hope we can possibly make up this deliverable later.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # project10
 
 1
