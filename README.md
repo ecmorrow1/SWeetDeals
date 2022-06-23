@@ -18,15 +18,15 @@ Python and Selenium are utilized to ineteract with the website and generate the 
 
 Data generated from the Python and Selenium tools will be cleaned using Python such that only the most pertinent information is utilized for analysis.  The data to be loaded into the database after cleaning will include:
 
-trip_id (primary_key) [example: LAX->SMF 06/22/2022 - 06/24/2022]
-departing_airport_code
-visiting_airport_code
-departure_date (including time)
-return_date (including time)
-total_cost
-trip_duration
-number_of_stops
-total_layover_duration
+trip_id (primary_key) [example: LAX->SMF 06/22/2022 - 06/24/2022]</br>
+departing_airport_code</br>
+visiting_airport_code</br>
+departure_date (including time)</br>
+return_date (including time)</br>
+total_cost</br>
+trip_duration</br>
+number_of_stops</br>
+total_layover_duration</br>
 
 ### Data Storage
 
