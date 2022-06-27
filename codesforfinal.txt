@@ -29,3 +29,23 @@ s3 bucket
 sweetdealsucb-virt-data-pt-02-2022-u-b
 
 s3://sweetdealsucb-virt-data-pt-02-2022-u-b
+
+
+QuickDBD
+
+Flights
+-
+timestamp date
+trip_id Varchar pk 
+depart_airport VARCHAR  
+return_airport VARCHAR  
+depart_date date  
+return_date date  
+total_cost int  
+depart_datetime time  
+depart_duration int  
+depart_stops int  
+return_datetime time  
+return_duration int  
+return_stops int  
+
