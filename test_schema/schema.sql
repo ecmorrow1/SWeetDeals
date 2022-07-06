@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS test (
-	timestamp timestamp PRIMARY KEY,
+	time_stamp timestamp PRIMARY KEY,
 	trip_id varchar NOT NULL,
 	depart_airport varchar(4) NOT NULL,
 	return_airport varchar(4) NOT NULL,
@@ -15,3 +15,6 @@ CREATE TABLE IF NOT EXISTS test (
 )
 
 SELECT * FROM test;
+
+ALTER TABLE test DROP COLUMN index;
+ALTER TABLE test RENAME COLUMN timestamp TO time_stamp;
