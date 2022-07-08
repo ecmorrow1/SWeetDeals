@@ -1,43 +1,71 @@
 from flask import Flask, render_template, request, jsonify
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
 from brain import hello
+from flask_cors import CORS
 import pandas as pd
 import os
+
+import json
+import plotly
+import plotly.express as px
+
+load_dotenv()
+
+db_password = os.getenv("db_password")
+db_username = os.getenv("db_username")
+db_url = os.getenv("db_url")
+db_port = os.getenv("db_port")
+db_name = os.getenv("db_name")
 # import brain
 # import psycopg2
 
-# from config import db_password
-from config import db_password
-from config import db_username
-from config import db_url
-from config import db_port
-from config import db_name
-
-
-
 app = Flask(__name__)
+cors = CORS(app)
 
-@app.route("/")
-def index():
+# @app.route("/")
+# def index():
 
-   # string = hello()
-   # return string
-   return render_template("index.html")
+#    return render_template("index_test.html")
 
-@app.route("/predict",methods=["POST"])
-def predict():
+# @app.route("/predict",methods=["POST","GET"])
+# def predict():
 
-   if request.method == "POST":
-      # string = str(request.form['exp'])
+#    if request.method == "POST":
+#       # string = str(request.form['exp'])
       
-      db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
-      engine = create_engine(db_string)
-      df = pd.read_sql('test', con=engine).to_json()
-      # df = df.to_json()
+#       db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
+#       engine = create_engine(db_string)
+#       # df = pd.read_sql('test', con=engine).to_json()
+#       # json_data = pd.read_sql(f"SELECT * FROM test WHERE strpos(trip_id,'SNA-PHX')>0 ", con=engine).to_json()
+#       # json_data = pd.read_sql(f"SELECT time_stamp,total_cost FROM test WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine).to_json()
+#       df = pd.read_sql(f"SELECT depart_duration,total_cost FROM test WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
 
-      # string = hello()
-      return df
+#       json_data = jsonify(df)
 
+#       json_data.headers.add("Access-Control-Allow-Origin", "*")
+
+#       # fig = px.line(df)
+
+#       # graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+#       # return render_template('predict.html',graphJSON=graphJSON)
+#       # return df.to_json()
+#       # return render_template('index_test.html')
+#       return json_data
+
+@app.route("/data",methods=['GET','POST'])
+def data():
+
+   db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
+   engine = create_engine(db_string)
+   # df = pd.read_sql('test', con=engine).to_json()
+   # json_data = pd.read_sql(f"SELECT * FROM test WHERE strpos(trip_id,'SNA-PHX')>0 ", con=engine).to_json()
+   json_data = pd.read_sql(f"SELECT * FROM test WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
+
+   # print(json_data)
+
+   return json_data.to_json()
    
 if __name__ == "__main__":
     app.run(debug=True)

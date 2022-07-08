@@ -133,3 +133,6 @@ dmypy.json
 
 # Config File
 config.py
+
+# .env file
+.env

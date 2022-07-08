@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+	<header>
+		<div class="container">
+		    <h2>Sweet Deals</h2>
+	    </div>
+	</header>
+    <div class="container">
+        <!-- <img src="https://media.giphy.com/media/xT39DkL2ZGZHA0Qr1S/giphy.gif"/> -->
+
+        <form action="/predict" method="POST" class="form">
+            <div class="fieldset">
+                <label>Enter Your Experience Level</label>
+                <!-- <input class="exp" name="exp"/> -->
+            </div>
+            <input type="submit" class="button" value="predict">
+        </form>
+
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        <!-- <script type='text/javascript'>
+            console.log("hi");
+            // var graphs = {{graphJSON | safe}};
+            // Plotly.plot('chart',graphs,{});
+        </script> -->
+        <script src='static/js/app.js'></script>
+    </div>
+</body>
+</html>

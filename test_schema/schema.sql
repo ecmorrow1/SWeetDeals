@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS test (
 	return_stops float NOT NULL
 )
 
+SELECT * FROM sweetdealtrip;
 SELECT * FROM test;
 
 ALTER TABLE test DROP COLUMN index;
