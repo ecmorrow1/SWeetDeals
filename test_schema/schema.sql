@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS sweetdealtrip (
 	depart_stops integer NOT NULL,
 	return_datetime timestamp NOT NULL,
 	return_duration integer NOT NULL,
-	return_stops integer NOT NULL
+	return_stops integer NOT NULL,
+	days_before_purchase integer NOT NULL
 )
 
 CREATE TABLE IF NOT EXISTS test (
@@ -27,5 +28,6 @@ CREATE TABLE IF NOT EXISTS test (
 	depart_stops integer NOT NULL,
 	return_datetime timestamp NOT NULL,
 	return_duration integer NOT NULL,
-	return_stops integer NOT NULL
+	return_stops integer NOT NULL,
+	days_before_purchase integer NOT NULL
 )
