@@ -7,3 +7,7 @@ ALTER TABLE test DROP COLUMN index;
 ALTER TABLE test RENAME COLUMN timestamp TO time_stamp;
 
 DROP TABLE IF EXISTS test;
+
+
+
+DELETE FROM sweetdealtrip WHERE TRUE;
