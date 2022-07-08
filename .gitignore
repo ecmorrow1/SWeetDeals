@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# DS_CODE
+.DS_CODE
+
+# Config File
+config.py
+
+# .env file
+.env
