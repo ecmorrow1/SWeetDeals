@@ -1,3 +1,3 @@
-time_stamp,trip_id,depart_airport,return_airport,depart_date,return_date,total_cost,depart_datetime,depart_duration,depart_stops,return_datetime,return_duration,return_stops
-2022-07-08 01:08:26,BOS-SNA-07/09/2022-07/14/2022,BOS,SNA,07/09/2022,07/14/2022,660,2022-07-09 06:44:00,482,1,2022-07-14 16:44:00,610,1
-2022-07-08 01:09:23,BOS-SNA-07/16/2022-07/21/2022,BOS,SNA,07/16/2022,07/21/2022,902,2022-07-16 06:44:00,482,1,2022-07-21 16:44:00,610,1
+time_stamp,trip_id,depart_airport,return_airport,depart_date,return_date,total_cost,depart_datetime,depart_duration,depart_stops,return_datetime,return_duration,return_stops,days_before_purchase
+7/8/2022 1:21,BOS-SNA-07/09/2022-07/14/2022,BOS,SNA,7/9/2022,7/14/2022,660,7/9/2022 6:44,482,1,7/14/2022 16:44,610,1,0
+7/8/2022 1:22,BOS-SNA-07/16/2022-07/21/2022,BOS,SNA,7/16/2022,7/21/2022,902,7/16/2022 6:44,482,1,7/21/2022 16:44,610,1,7
