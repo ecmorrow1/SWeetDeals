@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +9,8 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
   <link rel="stylesheet" href="css/style.css">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.js"></script>
 </head>
-
 <body class="bg-info">
 
   <body class="bg-info">
@@ -19,26 +18,28 @@
       <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
         <a class="navbar-brand" href="index.html">Sweet Air Travel Deals</a>
       </nav>
-
     </div>
-
     <div class="jumbotron">
       <h1 class="display-5">Air Travel Made Easy with Sweet Deals</h1>
     </div>
-
-
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <h3>We are here to help you save!</h3>
           <h3><small>Let Sweet Deals find you the best options for your next getaway</small></h3>
         </div>
-
-        <div class="well">
+        <div>
           <h5> Select Trip ID</h5>
           <div class="col-md-4">
 
-            <select id="selOriginAirport"></select>
+          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+
+          <!-- <select id="selectOption">
+            <option value="Mickey">Mickey</option>
+            <option value="Minnie">Minnie</option>
+            <option value="Donald">Donald</option>
+            <option value="Goofy">Goofy</option>
+          </select> -->
             <h3>We are here to help you save!</h3>
             <h3><small>Let Sweet Deals find you the best options for your next getaway</small></h3>
           </div>
