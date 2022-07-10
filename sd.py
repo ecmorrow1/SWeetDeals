@@ -17,6 +17,7 @@ db_username = os.getenv("db_username")
 db_url = os.getenv("db_url")
 db_port = os.getenv("db_port")
 db_name = os.getenv("db_name")
+db_table = os.getenv("db_table")
 # import brain
 # import psycopg2
 
@@ -61,11 +62,42 @@ def data():
    engine = create_engine(db_string)
    # df = pd.read_sql('test', con=engine).to_json()
    # json_data = pd.read_sql(f"SELECT * FROM test WHERE strpos(trip_id,'SNA-PHX')>0 ", con=engine).to_json()
-   json_data = pd.read_sql(f"SELECT * FROM test WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
+   json_data = pd.read_sql(f"SELECT * FROM {db_table} WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
+   
+   json_data.set_index("time_stamp")
+   # json_data = df
 
-   # print(json_data)
+   # json_data = []
+   # for x in df:
+   #    json_data.append({
+   #       "time_stamp":x["time_stamp"],
+   #    })
 
-   return json_data.to_json()
+   # print(json_data.to_json())
+
+   return json_data.to_csv(index=False)
+
+@app.route("/data-<trip_id>",methods=['GET','POST'])
+def data(trip_id=None):
+
+   db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
+   engine = create_engine(db_string)
+   # df = pd.read_sql('test', con=engine).to_json()
+   # json_data = pd.read_sql(f"SELECT * FROM test WHERE strpos(trip_id,'SNA-PHX')>0 ", con=engine).to_json()
+   json_data = pd.read_sql(f"SELECT * FROM {db_table} WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
+   
+   json_data.set_index("time_stamp")
+   # json_data = df
+
+   # json_data = []
+   # for x in df:
+   #    json_data.append({
+   #       "time_stamp":x["time_stamp"],
+   #    })
+
+   # print(json_data.to_json())
+
+   return json_data.to_csv(index=False)
    
 if __name__ == "__main__":
     app.run(debug=True)
