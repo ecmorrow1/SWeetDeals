@@ -10,47 +10,35 @@ The intended use for data collected is an academic exercise intended for the pur
 
 ## Data Pipeline
 
-### Data Generation
+### Data Generation and cleaning
 
-Python, Selenium, and Beautiful Soup are utilized to interact with the website and generate the dataset to be analyzed.  Data are pulled from the website on a daily basis in order to provide a dataset that may demonstrate when price fluctuations occur.
+Python, Selenium, and Beautiful Soup are utilized to interact with the website and generate datasets to be analyzed.  Data are pulled from the website on a daily basis in order to provide a dataset that may demonstrate when price fluctuations occur and when the best time to travel and/or the best time to purchase travel occur.
 
-The sweet_deals.ipynb file is fully functional as a standalone tool for getting flight information.
-
-### Data Cleaning
-
-Data generated from the Python and Selenium tools will be cleaned using Python such that only the most pertinent information is utilized for analysis.  The data to be loaded into the database after cleaning will include:
-
-time_stamp (primary_key)</br>
-trip_id [example: LAX->SMF 06/22/2022 - 06/24/2022]</br>
-departing_airport_code</br>
-visiting_airport_code</br>
-departure_date (including time)</br>
-return_date (including time)</br>
-total_cost</br>
-trip_duration</br>
-number_of_stops</br>
-total_layover_duration</br>
-
-In order to feed the machine learning model, a new variable will be calculated from the time delta between time_stamp (the exact time a datum was collected) and the departure date.  This number is to be used in model training in order to determine how many days prior to a departure that a price drop can be expected to happen.
+The sweet_deals.ipynb file is fully functional as a standalone tool for getting flight information, cleaning the data to be set to the correct datatypes, and feeding the data directly into the AWS/Postgres database.
 
 ### Data Storage
 
-An AWS relational database has been established and schema for the database are in use.
+Given that the data consist entirely of varchar and integers, a PostgreSQL database was built using the AWS platform.  Data are stored on a single table with columns as outlined in the ERD, below:
+![SweetDeals ERD](Queries/SweetDeals_ERD.JPG)
 
-### Flask App
-
-A flask app is under development to tie together all of the related components of the project, including data collection, storage, retrieval, and presentation.
-
-### Analysis
-
-#### Primary Analysis
-
-Data will be analyzed with Python, Matplotlib, and other tools to determine trends in the data to see if optimal times to purchase tickets can be determined.
-
-#### Machine Learning
-
-Though there is not an explicit goal to utilize machine learning as the instructional team has provided an exemption, given the complexity of the chosen project, the stretch goal will be to utilize unsupervised machine learning to find trends in data over time.
+Schema and a file of useful queries can be found in the Queries folder.
 
 ### Data Visualization
 
-Javascript, html, and D3 are being utilized to provide visualization of the data and the findings.
+To connect the data pipeline all the way to visualizatoin, an html page has been built to select and display visualizations for "Total Cost vs Days Before Departure" and "Total Cost vs Timestamp for the Date the Data Were Collected".  The page utilizes JavaScript, D3, and Plotly in order to accomplish this.
+
+The data for the visualizations are pulled directly from the database with the use of the sd.py flask app.  The app.js file has been built to pass trip_id info and airport info to the flask app in order to execute the appropriate database connections and retrieve the desired data.  Users are able to select the data that is plotted with the use of dropdown menus that are populated with trip IDs and airport codes acquired through database calls with the sd.py flask app.
+
+As a development tool to verify that the JavaScript app was able to produce the correct graphs, the sweet_deals_visualizations.ipynb notebook was developed to similarly build the graphs using Matplotlib.
+
+### Analysis
+
+#### Machine Learning
+
+Though there is not an explicit goal to utilize machine learning as the instructional team has provided an exemption, given the complexity of the chosen project.  However, ML techniques have been applied and the data have proven to be too variable for the machines to put together a reliable model for how the pricing will occur.
+
+#### Primary Analysis
+
+Despite the ML techniques being unable to produce a reliable model, analysis of the data show some trends like the increase in price as the current date approaches the departure date:
+
+![Days Before Purchase](Resources/days_before_purchase_example.JPG)<br>
