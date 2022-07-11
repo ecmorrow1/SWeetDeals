@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Air Travel AI Assistant</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.js"></script>
+</head>
+
+<body class="bg-info">
+  <div class="wrapper">
+    <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+      <a class="navbar-brand" href="index.html">Air Travel Tracker</a>
+    </nav>
+  </div>
+
+  <!-- #Jumbotron -->
+  <div class="jumbotron">
+    <h1 class="display-5">Air Travel Made Easy with <br> Sweet Deals</h1>
+  </div>
+
+  <div class="container-fluid col-md-12">
+    <h5>Select A Travel Route</h5>
+    <div class="col-md-6">
+      <select id="selectAirportData" onchange="optionTwoChanged(this.value)"></select>
+      <h5>Total Cost Versus the Number of Days Before Departure</h5>
+    </div>
+    <div class="col-md-12">
+      <div id="plotArea2" class="panel-body"></div>
+      <br>
+    </div>
+  </div>
+  <div class="container-fluid col-md-12">
+    <h5>Select Trip ID</h5>
+    <div class="col-md-12">
+      <select id="selectTripData" onchange="optionOneChanged(this.value)"></select>
+    </div>
+    <div class="col-md-12">
+      <h5>Price Change Trends Versus Time</h5>
+      <div id="plotArea" class="panel-body"></div>
+      <br>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.4.4/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="static/js/app.js"></script>
+
+
+
+</body>
+
+</html>

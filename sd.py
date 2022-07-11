@@ -1,103 +1,68 @@
-from flask import Flask, render_template, request, jsonify
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
-from brain import hello
 from flask_cors import CORS
+from flask import Flask
 import pandas as pd
 import os
 
-import json
-import plotly
-import plotly.express as px
-
 load_dotenv()
-
 db_password = os.getenv("db_password")
 db_username = os.getenv("db_username")
 db_url = os.getenv("db_url")
 db_port = os.getenv("db_port")
 db_name = os.getenv("db_name")
 db_table = os.getenv("db_table")
-# import brain
-# import psycopg2
 
 app = Flask(__name__)
+# Set CORS to accept any and all traffic (mostly for convenience)
 cors = CORS(app)
 
-# @app.route("/")
-# def index():
+# A route for pull data based on departure and return airports
+@app.route("/airports/<airport_data>",methods=['GET','POST'])
+@app.route("/airports",methods=['GET','POST'])
+def airportData(airport_data=None):
 
-#    return render_template("index_test.html")
+   # Split the airport codes based on the hyphen separating them
+   airports = airport_data.split('-')
 
-# @app.route("/predict",methods=["POST","GET"])
-# def predict():
-
-#    if request.method == "POST":
-#       # string = str(request.form['exp'])
+   # Establish the connection to the database
+   db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
+   engine = create_engine(db_string)
+   
+   if airport_data:
+      # Select the rows that have the departure and destination airports that are needed
+      data = pd.read_sql(f"SELECT * FROM {db_table} WHERE depart_airport='{airports[0]}' AND return_airport='{airports[1]}' ", con=engine)
+   else:
+      # If no selection is made, it should be during the init() function call and pull all data from the table to populate the dropdown
+      data = pd.read_sql(f"SELECT * FROM {db_table} ", con=engine)
       
-#       db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
-#       engine = create_engine(db_string)
-#       # df = pd.read_sql('test', con=engine).to_json()
-#       # json_data = pd.read_sql(f"SELECT * FROM test WHERE strpos(trip_id,'SNA-PHX')>0 ", con=engine).to_json()
-#       # json_data = pd.read_sql(f"SELECT time_stamp,total_cost FROM test WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine).to_json()
-#       df = pd.read_sql(f"SELECT depart_duration,total_cost FROM test WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
+   # Set the index to be the time_stamp column   
+   data.set_index("time_stamp")
 
-#       json_data = jsonify(df)
+   # Avoid having to_csv add an index column when the data gets passed
+   return data.to_csv(index=False)
 
-#       json_data.headers.add("Access-Control-Allow-Origin", "*")
-
-#       # fig = px.line(df)
-
-#       # graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
-#       # return render_template('predict.html',graphJSON=graphJSON)
-#       # return df.to_json()
-#       # return render_template('index_test.html')
-#       return json_data
-
+# A route for pulling data based on a trip's ID number
+@app.route("/data/<trip_id>",methods=['GET','POST'])
 @app.route("/data",methods=['GET','POST'])
-def data():
+def tripData(trip_id=None):
 
+   # Establish the connection to the database
    db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
    engine = create_engine(db_string)
-   # df = pd.read_sql('test', con=engine).to_json()
-   # json_data = pd.read_sql(f"SELECT * FROM test WHERE strpos(trip_id,'SNA-PHX')>0 ", con=engine).to_json()
-   json_data = pd.read_sql(f"SELECT * FROM {db_table} WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
    
-   json_data.set_index("time_stamp")
-   # json_data = df
+   if trip_id:
+      # Select the rows with the desired trip ID
+      data = pd.read_sql(f"SELECT * FROM {db_table} WHERE trip_id='{trip_id}' ", con=engine)
+   else:
+      # If no selection is made, it should be during the init() function call and pull all data from the table to populate the dropdown
+      data = pd.read_sql(f"SELECT * FROM {db_table} ", con=engine)
 
-   # json_data = []
-   # for x in df:
-   #    json_data.append({
-   #       "time_stamp":x["time_stamp"],
-   #    })
+   # Set the index to be the time_stamp column   
+   data.set_index("time_stamp")
 
-   # print(json_data.to_json())
-
-   return json_data.to_csv(index=False)
-
-@app.route("/data-<trip_id>",methods=['GET','POST'])
-def data(trip_id=None):
-
-   db_string = f"postgresql://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}"
-   engine = create_engine(db_string)
-   # df = pd.read_sql('test', con=engine).to_json()
-   # json_data = pd.read_sql(f"SELECT * FROM test WHERE strpos(trip_id,'SNA-PHX')>0 ", con=engine).to_json()
-   json_data = pd.read_sql(f"SELECT * FROM {db_table} WHERE trip_id='LAX-ORD-11/24/2022-11/28/2022' ", con=engine)
-   
-   json_data.set_index("time_stamp")
-   # json_data = df
-
-   # json_data = []
-   # for x in df:
-   #    json_data.append({
-   #       "time_stamp":x["time_stamp"],
-   #    })
-
-   # print(json_data.to_json())
-
-   return json_data.to_csv(index=False)
+   # Avoid having to_csv add an index column when the data gets passed
+   return data.to_csv(index=False)
    
 if __name__ == "__main__":
     app.run(debug=True)
