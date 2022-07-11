@@ -11,7 +11,7 @@ SELECT * FROM sweetdealtrip WHERE strpos(trip_id,'LAX-PHX')>0;
 SELECT * FROM sweetdealtrip WHERE strpos(trip_id,'SNA-ORD')>0;
 SELECT * FROM sweetdealtrip WHERE strpos(trip_id,'2022-06-30')>0;
 
-SELECT * FROM sweetdealtrip WHERE time_stamp>'2022-07-10';
+SELECT * FROM sweetdealtrip WHERE time_stamp>'2022-07-11';
 SELECT * FROM sweetdealtrip WHERE time_stamp>'2022-07-10' AND strpos(trip_id,'SNA-PHX')>0;
 SELECT * FROM sweetdealtrip WHERE time_stamp>'2022-07-10' AND strpos(trip_id,'SFO-IAD')>0;
 SELECT * FROM sweetdealtrip WHERE time_stamp>'2022-07-10' AND strpos(trip_id,'SJC-MSY')>0;
@@ -24,6 +24,8 @@ SELECT * FROM sweetdealtrip WHERE depart_airport='SNA';
 SELECT * FROM sweetdealtrip WHERE depart_airport='SFO';
 SELECT * FROM sweetdealtrip WHERE depart_airport='SJC';
 SELECT * FROM sweetdealtrip WHERE depart_airport='LAX';
+
+SELECT * FROM sweetdealtrip WHERE depart_date='2022-07-14';
 
 SELECT * FROM sweetdealtrip WHERE time_stamp>'2022-07-09' AND strpos(trip_id,'LAX-ORD')>0;
 SELECT * FROM sweetdealtrip WHERE time_stamp>'2022-07-10';
