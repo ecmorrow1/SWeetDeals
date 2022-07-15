@@ -1,6 +1,6 @@
 
 -- Methods for selection
-SELECT * FROM test;
+-- SELECT * FROM test;
 SELECT * FROM sweetdealtrip;
 SELECT COUNT(*) FROM sweetdealtrip;
 SELECT * FROM sweetdealtrip WHERE trip_id='BOS-SNA-07/09/2022-07/14/2022';
